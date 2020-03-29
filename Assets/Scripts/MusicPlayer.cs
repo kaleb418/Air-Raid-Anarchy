@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MusicPlayer:MonoBehaviour {
     [SerializeField] AudioClip themeAudioClip;
+    [SerializeField] AudioClip gameplayAudioClip;
 
     private AudioSource musicSource;
     private double volumeGoal;
@@ -39,6 +40,8 @@ public class MusicPlayer:MonoBehaviour {
     }
 
     private void LoadFirstScene() {
+        musicSource.Stop();
+        musicSource.PlayOneShot(gameplayAudioClip);
         SceneManager.LoadScene(1);
     }
 }

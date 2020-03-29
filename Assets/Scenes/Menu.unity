@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   themeAudioClip: {fileID: 8300000, guid: d9f09702c56fd4e38886727a9ee04e47, type: 3}
+  gameplayAudioClip: {fileID: 8300000, guid: 91abe3d4c1707490d952237f82f35fc7, type: 3}
 --- !u!1 &1998139422
 GameObject:
   m_ObjectHideFlags: 0
