@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MusicPlayer:MonoBehaviour {
     [SerializeField] AudioClip themeAudioClip;
@@ -21,7 +20,7 @@ public class MusicPlayer:MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        ProcessKeyInputs();
+
     }
 
     private void PlayThemeMusic() {
@@ -31,17 +30,5 @@ public class MusicPlayer:MonoBehaviour {
         musicSource.pitch = 1;
         volumeGoal = 1;
         musicSource.PlayOneShot(themeAudioClip);
-    }
-
-    private void ProcessKeyInputs() {
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            LoadFirstScene();
-        }
-    }
-
-    private void LoadFirstScene() {
-        musicSource.Stop();
-        musicSource.PlayOneShot(gameplayAudioClip);
-        SceneManager.LoadScene(1);
     }
 }
