@@ -8,8 +8,11 @@ public class EnemyDestroyer:MonoBehaviour {
     [SerializeField] Transform runtimeSpawnParent;
     [SerializeField] int health;
 
+    private Scoreboard playerScoreboard;
+
     // Start is called before the first frame update
     void Start() {
+        playerScoreboard = FindObjectOfType<Scoreboard>();
     }
 
     // Update is called once per frame
@@ -23,6 +26,7 @@ public class EnemyDestroyer:MonoBehaviour {
             GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
             fx.transform.parent = runtimeSpawnParent;
             Destroy(gameObject);
+            playerScoreboard.ScoreHit();
         }
     }
 }

@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CollisionHandler: MonoBehaviour {
 
     [SerializeField] float levelLoadDelay = 1f;
     [SerializeField] GameObject deathFX;
 
+    private SceneLoader sceneLoader;
+
     // Start is called before the first frame update
     void Start() {
-        
+        sceneLoader = FindObjectOfType<SceneLoader>();
     }
 
     // Update is called once per frame
@@ -25,11 +26,6 @@ public class CollisionHandler: MonoBehaviour {
     private void StartDeathSequence() {
         SendMessage("OnPlayerDeath");
         deathFX.SetActive(true);
-        Invoke("ReloadLevel", levelLoadDelay);
-    }
-
-    // called via Invoke()
-    private void ReloadLevel() {
-        SceneManager.LoadScene(1);
+        sceneLoader.ReloadScene();
     }
 }

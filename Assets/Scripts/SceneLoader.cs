@@ -5,18 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader: MonoBehaviour {
 
+    private enum Scenes {
+        MENU,
+        LEVEL_1
+    }
+    private InputHandler inputManager;
 
     // Start is called before the first frame update
     void Start() {
-        Invoke("LoadFirstScene", 5f);
+        SetSingleton();
+        inputManager = FindObjectOfType<InputHandler>();
     }
 
     // Update is called once per frame
     void Update() {
-        
+        LoadFirstSceneOnInput();
     }
 
-    private void LoadFirstScene() {
-        SceneManager.LoadScene(1);
+    public void ReloadScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void LoadFirstSceneOnInput() {
+        if(SceneManager.GetActiveScene().buildIndex != (int) Scenes.LEVEL_1) {
+            if(inputManager.GetKeyInput("Jump")) {
+                SceneManager.LoadScene((int) Scenes.LEVEL_1);
+            }
+        }
+    }
+
+    private void SetSingleton() {
+        if(FindObjectsOfType<SceneLoader>().Length > 1) {
+            Destroy(gameObject);
+        } else {
+            DontDestroyOnLoad(this);
+        }
     }
 }

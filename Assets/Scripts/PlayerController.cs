@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController: MonoBehaviour {
 
@@ -17,43 +16,40 @@ public class PlayerController: MonoBehaviour {
     [SerializeField] float rollFactor;
 
     private bool shouldProcessInput;
+    private InputHandler inputManager;
 
     // Start is called before the first frame update
     void Start() {
+        inputManager = FindObjectOfType<InputHandler>();
+
         shouldProcessInput = true;
     }
 
     // Update is called once per frame
     void Update() {
-        ProcessInput();
+        ProcessInput(inputManager.GetXThrow(), inputManager.GetYThrow());
     }
 
     // called via SendMessage()
-    void OnPlayerDeath() {
+    public void OnPlayerDeath() {
         this.shouldProcessInput = false;
     }
 
-    private void ProcessInput() {
+    private void ProcessInput(float xThrow, float yThrow) {
         if(this.shouldProcessInput) {
-            MoveShipOnInput();
-            RotateShipOnInput();
+            MoveShipOnInput(xThrow, yThrow);
+            RotateShipOnInput(xThrow, yThrow);
         }
     }
 
-    private void MoveShipOnInput() {
-        float xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
-        float yThrow = CrossPlatformInputManager.GetAxis("Vertical");
-
+    private void MoveShipOnInput(float xThrow, float yThrow) {
         float xOffset = transform.localPosition.x + (xThrow * Time.deltaTime * xMovementFactor);
         float yOffset = transform.localPosition.y + (yThrow * Time.deltaTime * yMovementFactor);
 
         transform.localPosition = new Vector3(Mathf.Clamp(xOffset, -xMovementLimit, xMovementLimit), Mathf.Clamp(yOffset, -yMovementLimit, yMovementLimit), transform.localPosition.z);
     }
 
-    private void RotateShipOnInput() {
-        float xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
-        float yThrow = CrossPlatformInputManager.GetAxis("Vertical");
-
+    private void RotateShipOnInput(float xThrow, float yThrow) {
         float pitch = transform.localPosition.y * pitchFactor + yThrow * (pitchFactor / 2);
         float yaw = transform.localPosition.x * yawFactor * 1.5f + xThrow * yawFactor;
         float roll = xThrow * pitchFactor * 1.5f;
