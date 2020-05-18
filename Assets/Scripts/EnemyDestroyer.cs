@@ -1,0 +1,28 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyDestroyer:MonoBehaviour {
+
+    [SerializeField] GameObject deathFX;
+    [SerializeField] Transform runtimeSpawnParent;
+    [SerializeField] int health;
+
+    // Start is called before the first frame update
+    void Start() {
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+    }
+
+    void OnParticleCollision(GameObject other) {
+        health--;
+        if(health == 0) {
+            GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
+            fx.transform.parent = runtimeSpawnParent;
+            Destroy(gameObject);
+        }
+    }
+}
