@@ -3,26 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class Ship:MonoBehaviour {
+public class PlayerController: MonoBehaviour {
 
+    [Header("Movement Factors")]
     [SerializeField] float xMovementFactor;
     [SerializeField] float xMovementLimit;
     [SerializeField] float yMovementFactor;
     [SerializeField] float yMovementLimit;
 
+    [Header("Angle Factors")]
     [SerializeField] float pitchFactor;
     [SerializeField] float yawFactor;
     [SerializeField] float rollFactor;
 
+    private bool shouldProcessInput;
+
     // Start is called before the first frame update
     void Start() {
-
+        shouldProcessInput = true;
     }
 
     // Update is called once per frame
     void Update() {
-        MoveShipOnInput();
-        RotateShipOnInput();
+        ProcessInput();
+    }
+
+    // called via SendMessage()
+    void OnPlayerDeath() {
+        this.shouldProcessInput = false;
+    }
+
+    private void ProcessInput() {
+        if(this.shouldProcessInput) {
+            MoveShipOnInput();
+            RotateShipOnInput();
+        }
     }
 
     private void MoveShipOnInput() {

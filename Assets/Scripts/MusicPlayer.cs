@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicPlayer:MonoBehaviour {
+public class MusicPlayer: MonoBehaviour {
     [SerializeField] AudioClip themeAudioClip;
     [SerializeField] AudioClip gameplayAudioClip;
 
@@ -10,11 +10,17 @@ public class MusicPlayer:MonoBehaviour {
     private double volumeGoal;
 
     void Awake() {
-        DontDestroyOnLoad(this);
+        // Singleton
+        if(FindObjectsOfType<MusicPlayer>().Length > 1) {
+            Destroy(gameObject);
+        } else {
+            DontDestroyOnLoad(this);
+        }
     }
 
     // Start is called before the first frame update
     void Start() {
+        musicSource = GetComponent<AudioSource>();
         PlayThemeMusic();
     }
 
@@ -24,7 +30,6 @@ public class MusicPlayer:MonoBehaviour {
     }
 
     private void PlayThemeMusic() {
-        musicSource = GetComponent<AudioSource>();
         musicSource.loop = true;
         musicSource.volume = 1;
         musicSource.pitch = 1;
