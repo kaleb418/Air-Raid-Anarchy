@@ -9,14 +9,16 @@ public class PlayerController: MonoBehaviour {
     [SerializeField] float xMovementLimit;
     [SerializeField] float yMovementFactor;
     [SerializeField] float yMovementLimit;
+    [SerializeField] GameObject[] playerBulletParticles;
 
     [Header("Angle Factors")]
     [SerializeField] float pitchFactor;
     [SerializeField] float yawFactor;
     [SerializeField] float rollFactor;
 
-    private bool shouldProcessInput;
     private InputHandler inputManager;
+
+    private bool shouldProcessInput;
 
     // Start is called before the first frame update
     void Start() {
@@ -27,7 +29,9 @@ public class PlayerController: MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        ProcessInput(inputManager.GetXThrow(), inputManager.GetYThrow());
+        ProcessMovementInput(inputManager.GetXThrow(), inputManager.GetYThrow());
+
+        ProcessFiringInput(inputManager.GetFireButton());
     }
 
     // called via SendMessage()
@@ -35,7 +39,15 @@ public class PlayerController: MonoBehaviour {
         this.shouldProcessInput = false;
     }
 
-    private void ProcessInput(float xThrow, float yThrow) {
+    private void ProcessFiringInput(bool isFiring) {
+        if(shouldProcessInput) {
+            foreach(GameObject particleSystem in playerBulletParticles) {
+                particleSystem.SetActive(isFiring);
+            }
+        }
+    }
+
+    private void ProcessMovementInput(float xThrow, float yThrow) {
         if(this.shouldProcessInput) {
             MoveShipOnInput(xThrow, yThrow);
             RotateShipOnInput(xThrow, yThrow);

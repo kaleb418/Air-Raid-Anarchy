@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDestroyer:MonoBehaviour {
+public class EnemyShip:MonoBehaviour {
 
     [SerializeField] GameObject deathFX;
     [SerializeField] Transform runtimeSpawnParent;

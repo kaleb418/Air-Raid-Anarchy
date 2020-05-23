@@ -33,6 +33,10 @@ public class InputHandler: MonoBehaviour {
         return CrossPlatformInputManager.GetAxis("Vertical");
     }
 
+    public bool GetFireButton() {
+        return CrossPlatformInputManager.GetButton("Fire");
+    }
+
     private void SetSingleton() {
         if(FindObjectsOfType<InputHandler>().Length > 1) {
             Destroy(gameObject);
