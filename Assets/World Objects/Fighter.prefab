@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2990441544797421543}
   - component: {fileID: 3000269665919979999}
   - component: {fileID: 6975459385182066915}
+  - component: {fileID: 424110466}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -26,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3022366952920186427}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.512085, y: -11.966812, z: -62.39264}
-  m_LocalScale: {x: 18.702, y: 18.702, z: 18.702}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6604988, y: 0.12685722, z: 0.5375033}
   m_Center: {x: 0, y: 0.000000007450581, z: 0.00000011920929}
+--- !u!114 &424110466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022366952920186427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf6a53806ea04ae58979e9ca768b4e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathFX: {fileID: 7936575830731839737, guid: a43b62e636ede4d27a65b85204fbadd6, type: 3}
+  runtimeSpawnParent: {fileID: 0}
+  killValue: 12

@@ -6,6 +6,7 @@ public class EnemyFighter: MonoBehaviour {
 
     [SerializeField] GameObject deathFX;
     [SerializeField] Transform runtimeSpawnParent;
+    [SerializeField] int killValue;
 
     private Scoreboard playerScoreboard;
 
@@ -23,6 +24,6 @@ public class EnemyFighter: MonoBehaviour {
         GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
         fx.transform.parent = runtimeSpawnParent;
         Destroy(gameObject);
-        playerScoreboard.ScoreHit();
+        playerScoreboard.ScoreHit(killValue);
     }
 }
