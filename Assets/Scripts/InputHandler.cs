@@ -22,7 +22,7 @@ public class InputHandler: MonoBehaviour {
     }
 
     public bool GetKeyInput(string keyName) {
-        return CrossPlatformInputManager.GetButtonDown(keyName);
+        return CrossPlatformInputManager.GetButton(keyName);
     }
 
     public float GetXThrow() {
@@ -31,10 +31,6 @@ public class InputHandler: MonoBehaviour {
 
     public float GetYThrow() {
         return CrossPlatformInputManager.GetAxis("Vertical");
-    }
-
-    public bool GetFireButton() {
-        return CrossPlatformInputManager.GetButton("Fire");
     }
 
     private void SetSingleton() {

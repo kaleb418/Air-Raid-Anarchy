@@ -26,6 +26,10 @@ public class SceneLoader: MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void ReloadSceneWithDelay(float delay) {
+        Invoke("ReloadScene", delay);
+    }
+
     private void LoadFirstSceneOnInput() {
         if(SceneManager.GetActiveScene().buildIndex != (int) Scenes.LEVEL_1) {
             if(inputManager.GetKeyInput("Jump")) {

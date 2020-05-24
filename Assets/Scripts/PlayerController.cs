@@ -9,12 +9,13 @@ public class PlayerController: MonoBehaviour {
     [SerializeField] float xMovementLimit;
     [SerializeField] float yMovementFactor;
     [SerializeField] float yMovementLimit;
-    [SerializeField] GameObject[] playerBulletParticles;
 
     [Header("Angle Factors")]
     [SerializeField] float pitchFactor;
     [SerializeField] float yawFactor;
     [SerializeField] float rollFactor;
+
+    [SerializeField] ParticleSystem[] playerBulletParticles;
 
     private InputHandler inputManager;
 
@@ -31,7 +32,7 @@ public class PlayerController: MonoBehaviour {
     void Update() {
         ProcessMovementInput(inputManager.GetXThrow(), inputManager.GetYThrow());
 
-        ProcessFiringInput(inputManager.GetFireButton());
+        ProcessFiringInput(inputManager.GetKeyInput("Fire"));
     }
 
     // called via SendMessage()
@@ -41,8 +42,9 @@ public class PlayerController: MonoBehaviour {
 
     private void ProcessFiringInput(bool isFiring) {
         if(shouldProcessInput) {
-            foreach(GameObject particleSystem in playerBulletParticles) {
-                particleSystem.SetActive(isFiring);
+            foreach(ParticleSystem pSystem in playerBulletParticles) {
+                var em = pSystem.emission;
+                em.enabled = isFiring;
             }
         }
     }

@@ -26,6 +26,6 @@ public class CollisionHandler: MonoBehaviour {
     private void StartDeathSequence() {
         SendMessage("OnPlayerDeath");
         deathFX.SetActive(true);
-        sceneLoader.ReloadScene();
+        sceneLoader.ReloadSceneWithDelay(5f);
     }
 }
